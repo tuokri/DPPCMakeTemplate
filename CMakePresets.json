@@ -1,0 +1,128 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 29,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "config-base",
+      "hidden": true,
+      "displayName": "Base Config",
+      "description": "Common base configuration",
+      "binaryDir": "${sourceDir}/cmake-build-${presetName}",
+      "toolchainFile": "submodules/vcpkg/scripts/buildsystems/vcpkg.cmake"
+    },
+    {
+      "name": "config-base-windows",
+      "inherits": "config-base",
+      "hidden": true,
+      "generator": "Visual Studio 2022",
+      "condition": {
+        "type": "equals",
+        "lhs": "${hostSystemName}",
+        "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe"
+      }
+    },
+    {
+      "name": "config-base-windows-debug",
+      "inherits": "config-base-windows",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "DCT_COMPILE_OPTIONS": "/W4;/await:strict;/Zi",
+        "DCT_LINK_OPTIONS": ""
+      }
+    },
+    {
+      "name": "config-base-windows-release",
+      "inherits": "config-base-windows",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "DCT_COMPILE_OPTIONS": "/W4;/await:strict",
+        "DCT_LINK_OPTIONS": ""
+      }
+    },
+    {
+      "name": "config-base-windows-relwithdbg",
+      "inherits": "config-base-windows",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "DCT_COMPILE_OPTIONS": "/W4;/await:strict",
+        "DCT_LINK_OPTIONS": ""
+      }
+    },
+    {
+      "name": "config-windows-debug-x64",
+      "displayName": "Windows Debug x64 configuration",
+      "inherits": "config-base-windows-debug",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "binaryDir": "${sourceDir}/cmake-build-${presetName}"
+    },
+    {
+      "name": "config-windows-debug-x64-asan",
+      "displayName": "Windows Debug x64 configuration (with AddressSanitizer)",
+      "inherits": "config-base-windows-debug",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "binaryDir": "${sourceDir}/cmake-build-${presetName}",
+      "cacheVariables": {
+        "DCT_COMPILE_OPTIONS": "/W4;/await:strict;/Zi;/fsanitize=address;"
+      }
+    },
+    {
+      "name": "config-windows-release-x64",
+      "displayName": "Windows Release x64 configuration",
+      "inherits": "config-base-windows-release",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "binaryDir": "${sourceDir}/cmake-build-${presetName}"
+    },
+    {
+      "name": "config-windows-relwithdbg-x64",
+      "displayName": "Windows RelWithDbg x64 configuration",
+      "inherits": "config-base-windows-relwithdbg",
+      "architecture": {
+        "value": "x64",
+        "strategy": "external"
+      },
+      "binaryDir": "${sourceDir}/cmake-build-${presetName}"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "windows-debug-x64",
+      "configurePreset": "config-windows-debug-x64",
+      "displayName": "Windows Debug x64"
+    },
+    {
+      "name": "windows-debug-x64-asan",
+      "configurePreset": "config-windows-debug-x64-asan",
+      "displayName": "Windows Debug x64 (with AddressSanitizer)"
+    },
+    {
+      "name": "windows-release-x64",
+      "configurePreset": "config-windows-release-x64",
+      "displayName": "Windows Release x64"
+    },
+    {
+      "name": "windows-relwithdbg-x64",
+      "configurePreset": "config-windows-relwithdbg-x64",
+      "displayName": "Windows RelWithDbg x64"
+    }
+  ]
+}
