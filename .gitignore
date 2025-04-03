@@ -33,3 +33,6 @@
 
 # CMake build directories
 cmake-build-*
+
+# TODO: is there a reason to include this?
+.vscode/

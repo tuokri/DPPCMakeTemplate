@@ -30,6 +30,7 @@ target_include_directories(
 set(
     DPP_EXAMPLE_BOT_LIBS
     dpp
+    spdlog::spdlog
 )
 
 target_link_libraries(

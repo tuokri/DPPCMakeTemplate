@@ -1,0 +1,7 @@
+{
+    "dependencies": [
+        "spdlog"
+    ],
+    "name": "dpp-cmake-template",
+    "version": "0.1.0"
+}

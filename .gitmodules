@@ -1,3 +1,6 @@
 [submodule "submodules/dpp"]
 	path = submodules/dpp
-	url = git@github.com:brainboxdotcc/DPP.git
+	url = https://github.com/brainboxdotcc/DPP.git
+[submodule "submodules/vcpkg"]
+	path = submodules/vcpkg
+	url = https://github.com/microsoft/vcpkg.git

@@ -24,4 +24,10 @@ endif ()
 
 include(cmake/dpp.cmake)
 
+find_package(
+    spdlog
+    CONFIG
+    REQUIRED
+)
+
 add_subdirectory(src)
