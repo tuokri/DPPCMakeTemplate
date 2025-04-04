@@ -1,3 +1,6 @@
+# These options are used to customize how D++ is built.
+# Check submodules\dpp\CMakeLists.txt for documentation.
+
 set(DPP_INSTALL OFF)
 set(BUILD_VOICE_SUPPORT ON)
 set(RUN_LDCONFIG OFF)
