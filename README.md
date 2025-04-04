@@ -10,6 +10,10 @@ the sake of brevity).
 The D++ library is included as a Git submodule and vcpkg (also a submodule)
 is used to manage other dependencies.
 
+CMake configure and build presets are defined in
+[CMakePresets.json](./CMakePresets.json). You can use it as an example
+to customize the builds.
+
 There are multiple ways to achieve the same result, but this template is based
 on my opinionated way of doing C++ development.
 
@@ -46,7 +50,58 @@ but I do not personally use it so I cannot vouch for it.
 
 ## Building
 
-TODO
+Make a copy of this repository:
+
+![GitHub template](./resources/github_use_template.png)
+
+---
+
+Clone the repository you just created, **with submodules**:
+```sh
+git clone THE_CLONE_URL_OF_YOUR_REPO --recurse-submodules
+```
+
+---
+
+To make VS build tools available to VS Code, you have to launch VS Code from the
+VS Developer Command Prompt or VS Developer Powershell:
+
+https://learn.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022#start-from-windows-menu
+
+---
+
+Once you have the prompt open, navigate to your project folder and
+open VS Code there:
+
+```
+cd path\to\my\bot\project
+code .
+```
+
+---
+
+You can then select the desired CMake preset using the VS Code CMake
+tools GUI, or build manually from the VS Code terminal:
+
+```sh
+cmake --list-presets          # List configure presets.
+cmake --build --list-presets  # List build presets.
+```
+
+If you want to then build the Windows x64 Debug config,
+run the following commands:
+```sh
+cmake --preset config-windows-debug-x64
+cmake --build --preset windows-debug-x64
+```
+
+### VS Code extensions
+
+Recommended extensions from Microsoft:
+- C/C++
+- C/C++ Extension Pack
+- C/C++ Themes
+- CMAke Tools
 
 ## Dependency management with vcpkg
 
