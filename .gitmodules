@@ -1,6 +1,7 @@
 [submodule "submodules/dpp"]
 	path = submodules/dpp
 	url = https://github.com/brainboxdotcc/DPP.git
+	branch = tags/v10.1.2
 [submodule "submodules/vcpkg"]
 	path = submodules/vcpkg
 	url = https://github.com/microsoft/vcpkg.git
