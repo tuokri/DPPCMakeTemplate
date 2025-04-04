@@ -9,12 +9,15 @@ target_compile_features(
     cxx_std_20
 )
 
+# DCT_COMPILE_OPTIONS is defined in CMakePresets.json.
+# (DCT prefix stands for DPP CMake Template).
 target_compile_options(
     DPPExampleBot
     PRIVATE
     ${DCT_COMPILE_OPTIONS}
 )
 
+# DCT_LINK_OPTIONS is defined in CMakePresets.json.
 target_link_options(
     DPPExampleBot
     PRIVATE

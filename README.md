@@ -1,12 +1,17 @@
 # Unofficial D++ CMake Template for Windows
 
+# **THIS REPOSITORY AND DOCUMENTATION IS UNDER DEVELOPMENT, PLEASE DO NOT USE IT YET!**
+
 This is an unofficial sample repository to get started quickly on writing Discord bots
 with C++ on Windows, with Visual Studio Code and CMake (technically, nothing is
 stopping you from also using this on Linux, but Linux is omitted for
 the sake of brevity).
 
-The D++ library is included as a Git submodule and vcpkg is used to manage
-other dependencies.
+The D++ library is included as a Git submodule and vcpkg (also a submodule)
+is used to manage other dependencies.
+
+There are multiple ways to achieve the same result, but this template is based
+on my opinionated way of doing C++ development.
 
 ## Quickstart
 
@@ -42,3 +47,27 @@ but I do not personally use it so I cannot vouch for it.
 ## Building
 
 TODO
+
+## Dependency management with vcpkg
+
+TODO
+
+## Updating D++ and vcpkg
+
+#### D++
+
+```sh
+```
+
+#### vcpkg
+
+If you need to update the vcpkg submodule you can run the following commands:
+```sh
+git submodule update --remote submodules/vcpkg
+git add submodules/vcpkg
+git commit -m "Update vcpkg submodule"
+```
+
+Updating vcpkg will update all dependencies installed from
+vcpkg to their latest versions on vcpkg, which is good to do
+regularly, unless you have a reason to stay at specific version.
