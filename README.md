@@ -81,7 +81,11 @@ code .
 ---
 
 You can then select the desired CMake preset using the VS Code CMake
-tools GUI, or build manually from the VS Code terminal:
+tools GUI, and build and run the code from the GUI,
+
+*OR*
+
+build manually from the VS Code terminal:
 
 ```sh
 cmake --list-presets          # List configure presets.
