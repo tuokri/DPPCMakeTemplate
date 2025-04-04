@@ -105,7 +105,7 @@ Recommended extensions from Microsoft:
 - C/C++
 - C/C++ Extension Pack
 - C/C++ Themes
-- CMAke Tools
+- CMake Tools
 
 ## Dependency management with vcpkg
 
