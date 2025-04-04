@@ -56,7 +56,16 @@ TODO
 
 #### D++
 
+A word of warning: since this template is using D++ latest
+commit on the main branch, it is not guaranteed to be stable.
+If you need guaranteed stability, set the submodule manually
+to a specific release tag. Find a Git tutorial on how to do that.
+
+Updating the dpp submodule to the latest commit:
 ```sh
+git submodule update --remote submodules/dpp
+git add submodules/dpp
+git commit -m "Update dpp submodule"
 ```
 
 #### vcpkg
