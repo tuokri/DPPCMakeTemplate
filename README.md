@@ -87,6 +87,7 @@ tools GUI, and build and run the code from the GUI,
 
 build manually from the VS Code terminal:
 
+First, list the available CMake presets:
 ```sh
 cmake --list-presets          # List configure presets.
 cmake --build --list-presets  # List build presets.
