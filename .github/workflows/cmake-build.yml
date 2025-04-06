@@ -16,8 +16,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        build_type: [ "debug", "release", "relwithdbg" ]
+        build_type: [ "debug-x64", "debug-x64-asan", "release-x64", "relwithdbg-x64" ]
         os: [ "windows-2025" ]
+        include:
+          - os: "windows-2025"
+            platform: "windows"
 
     runs-on: ${{ matrix.os }}
 
@@ -43,9 +46,9 @@ jobs:
 
       - name: Configure CMake
         working-directory: ${{ github.workspace }}
-        run: cmake -G "${{ matrix.cmake_generator }}" ${{ env.cmake_extra_args }} --preset
-          config-${{ matrix.platform }}-${{ matrix.build_type }}-x64${{ matrix.preset_prefix }}
+        run: cmake ${{ env.cmake_extra_args }} --preset
+          config-${{ matrix.platform }}-${{ matrix.build_type }}
 
       - name: Build with CMake
         working-directory: ${{ github.workspace }}
-        run: cmake --build --preset ${{ matrix.platform }}-${{ matrix.build_type }}-x64${{ matrix.preset_prefix }}
+        run: cmake --build --preset ${{ matrix.platform }}-${{ matrix.build_type }}
