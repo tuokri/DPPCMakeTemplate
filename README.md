@@ -57,6 +57,7 @@ Make a copy of this repository:
 ---
 
 Clone the repository you just created, **with submodules**:
+
 ```sh
 git clone THE_CLONE_URL_OF_YOUR_REPO --recurse-submodules
 ```
@@ -88,6 +89,7 @@ tools GUI, and build and run the code from the GUI,
 build manually from the VS Code terminal:
 
 First, list the available CMake presets:
+
 ```sh
 cmake --list-presets          # List configure presets.
 cmake --build --list-presets  # List build presets.
@@ -95,6 +97,7 @@ cmake --build --list-presets  # List build presets.
 
 If you want to then build the Windows x64 Debug config,
 run the following commands:
+
 ```sh
 cmake --preset config-windows-debug-x64
 cmake --build --preset windows-debug-x64
@@ -103,6 +106,7 @@ cmake --build --preset windows-debug-x64
 ### VS Code extensions
 
 Recommended extensions from Microsoft:
+
 - C/C++
 - C/C++ Extension Pack
 - C/C++ Themes
@@ -122,6 +126,7 @@ If you need guaranteed stability, set the submodule manually
 to a specific release tag. Find a Git tutorial on how to do that.
 
 Updating the dpp submodule to the latest commit:
+
 ```sh
 git submodule update --remote submodules/dpp
 git add submodules/dpp
@@ -131,6 +136,7 @@ git commit -m "Update dpp submodule"
 #### vcpkg
 
 If you need to update the vcpkg submodule you can run the following commands:
+
 ```sh
 git submodule update --remote submodules/vcpkg
 git add submodules/vcpkg
