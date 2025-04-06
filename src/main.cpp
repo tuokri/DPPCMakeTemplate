@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include <exception>
 #include <format>
 #include <iostream>
 #include <memory>
@@ -37,7 +38,7 @@ std::string get_env_var(const std::string_view key)
     free(value);
     return ret;
 #else
-    char* value = std::getenv(key.data());
+    const char* value = std::getenv(key.data());
     if (!value)
     {
         throw std::runtime_error(std::format("unable to get env var: {}", key));
@@ -71,6 +72,7 @@ constexpr bool debugger_present()
 if (g_logger)                   \
 {                               \
     g_logger->flush();          \
+    spdlog::shutdown();         \
 }                               \
 
 // Helper macro to make debugging easier when debugger is attached.
@@ -99,7 +101,7 @@ int main()
         const auto sinks = std::vector<spdlog::sink_ptr>{stdout_sink, rotating_sink};
         g_logger = std::make_shared<spdlog::async_logger>(
             "DPPExampleBot", sinks.cbegin(), sinks.cend(), spdlog::thread_pool(),
-            spdlog::async_overflow_policy::overrun_oldest);
+            spdlog::async_overflow_policy::block);
         spdlog::register_logger(g_logger);
         g_logger->set_level(default_log_level);
         g_logger->set_pattern("[%Y-%m-%d %H:%M:%S.%e%z] [%n] [%^%l%$] [th#%t]: %v");
@@ -152,6 +154,8 @@ int main()
 
                 co_return;
             });
+
+        bot.start(dpp::st_wait);
 
         g_logger->info("exiting");
     }
