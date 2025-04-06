@@ -1,0 +1,51 @@
+name: Build cmake project
+
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "master"
+
+jobs:
+  build:
+    env:
+      VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
+
+    strategy:
+      fail-fast: false
+      matrix:
+        build_type: [ "debug", "release", "relwithdbg" ]
+        os: [ "windows-2025" ]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Export GitHub Actions cache environment variables
+        uses: actions/github-script@v7
+        with:
+          script: |
+            core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+            core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+
+      - name: Setup MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+        if: matrix.os == 'windows-2025'
+
+      - name: Print MSVC version
+        run: cl.exe
+        if: matrix.os == 'windows-2025'
+
+      - name: Configure CMake
+        working-directory: ${{ github.workspace }}
+        run: cmake -G "${{ matrix.cmake_generator }}" ${{ env.cmake_extra_args }} --preset
+          config-${{ matrix.platform }}-${{ matrix.build_type }}-x64${{ matrix.preset_prefix }}
+
+      - name: Build with CMake
+        working-directory: ${{ github.workspace }}
+        run: cmake --build --preset ${{ matrix.platform }}-${{ matrix.build_type }}-x64${{ matrix.preset_prefix }}

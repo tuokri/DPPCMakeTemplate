@@ -114,7 +114,8 @@ Recommended extensions from Microsoft:
 
 ## Dependency management with vcpkg
 
-TODO
+New dependencies from vcpkg can be added in [vcpkg.json](./vcpkg.json),
+in the `dependencies` block.
 
 ## Updating D++ and vcpkg
 
@@ -146,3 +147,10 @@ git commit -m "Update vcpkg submodule"
 Updating vcpkg will update all dependencies installed from
 vcpkg to their latest versions on vcpkg, which is good to do
 regularly, unless you have a reason to stay at specific version.
+
+## GitHub Actions
+
+This template uses GitHub Actions to build the project on
+every commit to the master branch. If you do not need the
+actions, you can safely delete the [.github](./.github) directory
+from your own repository.
