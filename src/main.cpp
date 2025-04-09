@@ -89,6 +89,11 @@ if (debugger_present())         \
 // like to use in my projects. Remove or modify it based on your needs.
 int main()
 {
+    int rc = EXIT_SUCCESS;
+
+    // Could also be a raw pointer, whatever you prefer.
+    std::shared_ptr<dpp::cluster> bot;
+
     try
     {
         // An example on setting up spdlog to log to a rotating file and stdout.
@@ -113,11 +118,11 @@ int main()
             throw std::runtime_error("invalid bot token");
         }
 
-        dpp::cluster bot{bot_token};
+        bot = std::make_shared<dpp::cluster>(bot_token);
 
         // Forward D++ logs to spdlog logger.
-        bot.on_log(
-            [](const dpp::log_t& event)
+        bot->on_log(
+            [bot, &rc](const dpp::log_t& event)
             {
                 switch (event.severity)
                 {
@@ -139,12 +144,16 @@ int main()
                     case dpp::ll_critical:
                     default:
                         g_logger->critical("{}", event.message);
+                        // NOTE: Assuming if we get here, the program is in
+                        // unrecoverable state anyway, so just bail.
+                        bot->shutdown();
+                        rc = EXIT_FAILURE;
                         break;
                 }
             });
 
         // Example stub coroutine slashcommand handler.
-        bot.on_slashcommand(
+        bot->on_slashcommand(
             [](const dpp::slashcommand_t& event) -> dpp::task<void>
             {
                 const auto cmd_name = event.command.get_command_name();
@@ -155,7 +164,7 @@ int main()
                 co_return;
             });
 
-        bot.start(dpp::st_wait);
+        bot->start(dpp::st_wait);
 
         g_logger->info("exiting");
     }
@@ -164,6 +173,10 @@ int main()
         if (g_logger)
         {
             g_logger->error("unhandled exception: {}", ex.what());
+        }
+        if (bot)
+        {
+            bot->shutdown();
         }
         THROW_IF_DEBUGGING();
         return EXIT_FAILURE;
@@ -174,10 +187,14 @@ int main()
         {
             g_logger->error("unhandled error");
         }
+        if (bot)
+        {
+            bot->shutdown();
+        }
         THROW_IF_DEBUGGING();
         return EXIT_FAILURE;
     }
 
     FLUSH_LOGGER();
-    return EXIT_SUCCESS;
+    return rc;
 }
