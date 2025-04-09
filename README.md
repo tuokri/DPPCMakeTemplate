@@ -117,6 +117,18 @@ Recommended extensions from Microsoft:
 The program reads the bot token from the `DISCORD_BOT_TOKEN` environment
 variable by default.
 
+## Running the bot
+
+You can run and debug the bot from the VS Code UI, provided that you
+have first set the bot token in your environment variables:
+
+![VS Code buttons](./resources/vs_code_debug_run.png)
+
+Or you can also create a launch configuration based on the
+[example launch configuration](./example_vscode_launch_configuration.json).
+
+https://code.visualstudio.com/docs/debugtest/debugging-configuration
+
 ## Dependency management with vcpkg
 
 New dependencies from vcpkg can be added in [vcpkg.json](./vcpkg.json),
