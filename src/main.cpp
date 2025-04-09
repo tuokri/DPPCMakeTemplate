@@ -159,7 +159,7 @@ int main()
                 const auto cmd_name = event.command.get_command_name();
                 g_logger->info("got slash command: {}", cmd_name);
 
-                // TODO: maybe do something neat here.
+                // TODO: build your bot and do something neat here.
 
                 co_return;
             });
