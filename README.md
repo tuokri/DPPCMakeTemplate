@@ -46,7 +46,7 @@ https://git-scm.com/downloads/win
 Download the 64-bit Git for Windows Setup Standalone Installer.
 
 Git for Windows installed with the Visual Studio Installer should also work,
-but I do not personally use it so I cannot vouch for it.
+but I do not personally use it, so I cannot vouch for it.
 
 ## Building
 
