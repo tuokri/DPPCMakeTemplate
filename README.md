@@ -112,6 +112,11 @@ Recommended extensions from Microsoft:
 - C/C++ Themes
 - CMake Tools
 
+## Environment variables
+
+The program reads the bot token from the `DISCORD_BOT_TOKEN` environment
+variable by default.
+
 ## Dependency management with vcpkg
 
 New dependencies from vcpkg can be added in [vcpkg.json](./vcpkg.json),
