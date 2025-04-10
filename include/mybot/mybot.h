@@ -19,6 +19,6 @@ namespace mybot
 #  define WINDOWS 0
 #endif
 
-std::shared_ptr<spdlog::logger> g_logger;
+extern std::shared_ptr<spdlog::logger> g_logger;
 
 } // namespace mybot
