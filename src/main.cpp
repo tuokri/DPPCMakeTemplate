@@ -14,7 +14,7 @@
 
 #include "mybot/mybot.h"
 
-using namespace mybot;
+std::shared_ptr<spdlog::logger> mybot::g_logger;
 
 namespace
 {
@@ -69,9 +69,9 @@ constexpr bool debugger_present()
 #endif // NDEBUG
 
 #define FLUSH_LOGGER()          \
-if (g_logger)                   \
+if (mybot::g_logger)            \
 {                               \
-    g_logger->flush();          \
+    mybot::g_logger->flush();   \
     spdlog::shutdown();         \
 }                               \
 
@@ -89,6 +89,8 @@ if (debugger_present())         \
 // like to use in my projects. Remove or modify it based on your needs.
 int main()
 {
+    using namespace mybot;
+
     int rc = EXIT_SUCCESS;
 
     // Could also be a raw pointer, whatever you prefer.
