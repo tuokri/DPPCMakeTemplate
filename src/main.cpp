@@ -162,6 +162,10 @@ int main()
                 g_logger->info("got slash command: {}", cmd_name);
 
                 // TODO: build your bot and do something neat here.
+                if (cmd_name == "ping")
+                {
+                    co_await event.co_reply("pong");
+                }
 
                 co_return;
             });
