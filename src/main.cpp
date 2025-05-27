@@ -68,7 +68,7 @@ constexpr bool debugger_present()
 
 #endif // NDEBUG
 
-#define FLUSH_LOGGER()          \
+#define FLUSH_SHUTDOWN_LOGGER() \
 if (mybot::g_logger)            \
 {                               \
     mybot::g_logger->flush();   \
@@ -77,7 +77,7 @@ if (mybot::g_logger)            \
 
 // Helper macro to make debugging easier when debugger is attached.
 #define THROW_IF_DEBUGGING()    \
-FLUSH_LOGGER();                 \
+FLUSH_SHUTDOWN_LOGGER();        \
 if (debugger_present())         \
 {                               \
     throw;                      \
@@ -201,6 +201,6 @@ int main()
         return EXIT_FAILURE;
     }
 
-    FLUSH_LOGGER();
+    FLUSH_SHUTDOWN_LOGGER();
     return rc;
 }
