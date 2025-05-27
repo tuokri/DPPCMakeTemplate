@@ -165,6 +165,8 @@ Updating vcpkg will update all dependencies installed from
 vcpkg to their latest versions on vcpkg, which is good to do
 regularly, unless you have a reason to stay at specific version.
 
+You may need to run CMake configure again after updating the submodules.
+
 ## GitHub Actions
 
 This template uses GitHub Actions to build the project on
