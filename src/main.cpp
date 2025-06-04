@@ -114,6 +114,8 @@ int main()
         g_logger->set_pattern("[%Y-%m-%d %H:%M:%S.%e%z] [%n] [%^%l%$] [th#%t]: %v");
 
         // Make sure to set DISCORD_BOT_TOKEN in your environment variables.
+        // Alternatively, hard-code the token here (NEVER COMMIT A HARD-CODED TOKEN!).
+        // const auto bot_token = "dangerous_hard_coded_token_goes_here";
         const auto bot_token = get_env_var("DISCORD_BOT_TOKEN");
         if (bot_token.empty())
         {
