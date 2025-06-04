@@ -69,6 +69,10 @@ VS Developer Command Prompt or VS Developer Powershell:
 
 https://learn.microsoft.com/en-us/visualstudio/ide/reference/command-prompt-powershell?view=vs-2022#start-from-windows-menu
 
+**In most cases, doing this only once at the beginning of the project was enough
+and CMake was able to find the build tools later by just starting VS Code normally
+from the shortcut!**
+
 ---
 
 Once you have the prompt open, navigate to your project folder and
