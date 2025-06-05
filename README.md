@@ -1,6 +1,4 @@
-# Unofficial D++ CMake Template for Windows
-
-# **THIS REPOSITORY AND DOCUMENTATION IS UNDER DEVELOPMENT, PLEASE DO NOT USE IT YET!**
+# Unofficial D++ CMake Template for Windows & VS Code
 
 This is an unofficial sample repository to get started quickly on writing Discord bots
 with C++ on Windows, with Visual Studio Code and CMake (technically, nothing is
@@ -35,6 +33,9 @@ and "C++ CMake tools for Windows" workloads and components installed.
 ![VS2022 Desktop Development with C++ workload](./resources/vs_installer_desktop_cpp.png)
 
 ![VS2022 CMake tools for Windows component](./resources/vs_installer_cmake.png)
+
+**NOTE:** it's also possible to only install VS BuildTools without installing the
+entire VS 2022 program, but it is not covered by this readme.
 
 ### Install Git for Windows
 
