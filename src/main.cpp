@@ -172,6 +172,21 @@ int main()
                 co_return;
             });
 
+        bot->on_ready(
+            [bot](const dpp::ready_t& event) -> dpp::task<void>
+            {
+                if (dpp::run_once<struct register_bot_commands>())
+                {
+                    dpp::slashcommand ping_cmd{"ping", "Pong!", bot->me.id};
+
+                    bot->global_bulk_command_create({ping_cmd});
+                }
+
+                g_logger->info("bot is ready and initialized");
+
+                co_return;
+            });
+
         bot->start(dpp::st_wait);
 
         g_logger->info("exiting");
