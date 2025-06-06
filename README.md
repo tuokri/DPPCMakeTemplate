@@ -20,7 +20,7 @@ on my opinionated way of doing C++ development.
 To get started with Visual Studio Code on Windows with this template,
 watch this quickstart video:
 
-#### TODO: PUT THE LINK HERE!
+[![DPPCMakeTemplate quickstart YouTube video](https://img.youtube.com/vi/XEZwtNvI84Y/0.jpg)](https://www.youtube.com/watch?v=XEZwtNvI84Y)
 
 ## Prerequisites
 
