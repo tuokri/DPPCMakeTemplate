@@ -1,16 +1,15 @@
 #include <cstdlib>
 #include <exception>
 #include <format>
-#include <iostream>
 #include <memory>
 #include <string>
 
 #include <dpp/dpp.h>
 
-#include <spdlog/spdlog.h>
 #include <spdlog/async.h>
-#include <spdlog/sinks/stdout_color_sinks.h>
+#include <spdlog/spdlog.h>
 #include <spdlog/sinks/rotating_file_sink.h>
+#include <spdlog/sinks/stdout_color_sinks.h>
 
 #include "mybot/mybot.h"
 
@@ -73,15 +72,15 @@ if (mybot::g_logger)            \
 {                               \
     mybot::g_logger->flush();   \
     spdlog::shutdown();         \
-}                               \
+}
 
-// Helper macro to make debugging easier when debugger is attached.
+// Helper macro to make debugging easier when a debugger is attached.
 #define THROW_IF_DEBUGGING()    \
 FLUSH_SHUTDOWN_LOGGER();        \
 if (debugger_present())         \
 {                               \
     throw;                      \
-}                               \
+}
 
 } // namespace
 
