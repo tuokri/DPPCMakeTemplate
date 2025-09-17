@@ -18,13 +18,14 @@ std::shared_ptr<spdlog::logger> mybot::g_logger;
 namespace
 {
 
+// Helper function to get the value of an environment variable,
+// with error handling included.
 std::string get_env_var(const std::string_view key)
 {
 #if WINDOWS
     char* value;
     std::size_t len;
-    const errno_t err = _dupenv_s(&value, &len, key.data());
-    if (err)
+    if (const errno_t err = _dupenv_s(&value, &len, key.data()))
     {
         throw std::runtime_error(std::format("_dupenv_s error: {}", err));
     }
@@ -48,6 +49,9 @@ std::string get_env_var(const std::string_view key)
 
 #ifndef NDEBUG
 
+// Just checks whether a debugger is attached or not
+// in order to do certain things differently with a debugger for
+// ease of debugging.
 bool debugger_present()
 {
 #if WINDOWS
@@ -67,6 +71,7 @@ constexpr bool debugger_present()
 
 #endif // NDEBUG
 
+// Helper macro to flush and shutdown the logger object.
 #define FLUSH_SHUTDOWN_LOGGER() \
 if (mybot::g_logger)            \
 {                               \
@@ -97,7 +102,9 @@ int main()
 
     try
     {
-        // An example on setting up spdlog to log to a rotating file and stdout.
+        // An example of setting up spdlog to log to a rotating file and stdout.
+        // Using spdlog is not mandatory but is included in this template because
+        // it is a neat little library.
         constexpr auto default_log_level = spdlog::level::debug;
         spdlog::init_thread_pool(8192, 2);
         constexpr auto max_log_size = 1024 * 1024 * 10;
@@ -148,7 +155,7 @@ int main()
                     default:
                         g_logger->critical("{}", event.message);
                         // NOTE: Assuming if we get here, the program is in
-                        // unrecoverable state anyway, so just bail.
+                        // an unrecoverable state anyway, so just bail.
                         bot->shutdown();
                         rc = EXIT_FAILURE;
                         break;
@@ -171,6 +178,7 @@ int main()
                 co_return;
             });
 
+        // Perform initialization tasks when the bot goes up.
         bot->on_ready(
             [bot](const dpp::ready_t& event) -> dpp::task<void>
             {
@@ -186,10 +194,12 @@ int main()
                 co_return;
             });
 
+        // Run until a stop is requested with CTRL+C or an unrecoverable error happens.
         bot->start(dpp::st_wait);
 
         g_logger->info("exiting");
     }
+    // Catch unhandled standard library exceptions, log them and bail.
     catch (const std::exception& ex)
     {
         if (g_logger)
@@ -203,6 +213,7 @@ int main()
         THROW_IF_DEBUGGING();
         return EXIT_FAILURE;
     }
+    // Catch anything else that was unhandled.
     catch (...)
     {
         if (g_logger)
