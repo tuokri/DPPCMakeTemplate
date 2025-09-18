@@ -108,8 +108,8 @@ int main()
         constexpr auto default_log_level = spdlog::level::debug;
         spdlog::init_thread_pool(8192, 2);
         constexpr auto max_log_size = 1024 * 1024 * 10;
-        auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
-        auto rotating_sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>(
+        const auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
+        const auto rotating_sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>(
             "DPPExampleBot.log", max_log_size, 3);
         const auto sinks = std::vector<spdlog::sink_ptr>{stdout_sink, rotating_sink};
         g_logger = std::make_shared<spdlog::async_logger>(
