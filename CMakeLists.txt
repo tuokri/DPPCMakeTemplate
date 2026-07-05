@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 4.2)
 project(DPPCMakeTemplate)
 
 set(CMAKE_CXX_STANDARD 20)

@@ -18,10 +18,15 @@
       "name": "config-base-windows",
       "inherits": "config-base",
       "hidden": true,
+      "generator": "Visual Studio 18 2026",
       "condition": {
         "type": "equals",
         "lhs": "${hostSystemName}",
         "rhs": "Windows"
+      },
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe"
       }
     },
     {
