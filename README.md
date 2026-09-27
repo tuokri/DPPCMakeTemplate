@@ -164,6 +164,10 @@ If you need to update the vcpkg submodule you can run the following commands:
 git submodule update --remote submodules/vcpkg
 git add submodules/vcpkg
 git commit -m "Update vcpkg submodule"
+
+# Important: bootstrapping vcpkg again after submodule update
+# ensures the latest vcpkg binary is being used!
+./submodules/vcpkg/bootstrap-vcpkg.bat
 ```
 
 Updating vcpkg will update all dependencies installed from
