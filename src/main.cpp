@@ -107,13 +107,14 @@ int main()
         // it is a neat little library.
         constexpr auto default_log_level = spdlog::level::debug;
         spdlog::init_thread_pool(8192, 2);
+        auto tp = spdlog::thread_pool();
         constexpr auto max_log_size = 1024 * 1024 * 10;
         const auto stdout_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
         const auto rotating_sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>(
             "DPPExampleBot.log", max_log_size, 3);
         const auto sinks = std::vector<spdlog::sink_ptr>{stdout_sink, rotating_sink};
         g_logger = std::make_shared<spdlog::async_logger>(
-            "DPPExampleBot", sinks.cbegin(), sinks.cend(), spdlog::thread_pool(),
+            "DPPExampleBot", sinks.cbegin(), sinks.cend(), tp,
             spdlog::async_overflow_policy::block);
         spdlog::register_logger(g_logger);
         g_logger->set_level(default_log_level);
